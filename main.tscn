@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn18l5xeoo3oo"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_iqxo7"]
+[ext_resource type="Shader" path="res://Assets/checkboard.gdshader" id="1_sg4r2"]
+[ext_resource type="PackedScene" uid="uid://dmlwkx7qthrfq" path="res://character.tscn" id="2_l5p14"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hc2dq"]
+render_priority = 0
+shader = ExtResource("1_sg4r2")
+shader_parameter/albedo = Color(0.239806, 0.35925, 0.641983, 1)
+shader_parameter/detail_texture_size = Vector2(256, 256)
+shader_parameter/specular = null
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.5
+shader_parameter/point_size = null
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_iqxo7")
+
+[node name="Map" type="CSGCombiner3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Map"]
+size = Vector3(10, 0.1, 10)
+material = SubResource("ShaderMaterial_hc2dq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.921633, 0.388063, 0, -0.388063, 0.921633, 0, 8.48143, 14.6684)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.66179, -0.654875, 0.364928, 0.176915, 0.609446, 0.772837, -0.728516, -0.446895, 0.519182, 4.34109, 4.1763, 4.59912)
+shadow_enabled = true
+
+[node name="Character" parent="." instance=ExtResource("2_l5p14")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CustomizationUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CustomizationUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CustomizationUI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="BSelectHead" type="Button" parent="CustomizationUI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Select head"
+
+[node name="BSelectBody" type="Button" parent="CustomizationUI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Select body"
+
+[connection signal="pressed" from="CustomizationUI/MarginContainer/HBoxContainer/BSelectHead" to="." method="_on_b_select_head_pressed"]
+[connection signal="pressed" from="CustomizationUI/MarginContainer/HBoxContainer/BSelectBody" to="." method="_on_b_select_body_pressed"]

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://xwe4x4h5ks0g"]
+
+[ext_resource type="PackedScene" uid="uid://xqdouwqs6kl4" path="res://Assets/head_var1.glb" id="1_ct28k"]
+
+[node name="head_var1" instance=ExtResource("1_ct28k")]

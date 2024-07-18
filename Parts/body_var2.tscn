@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnl0dm3rtf88i"]
+
+[ext_resource type="PackedScene" uid="uid://cbasr1eouojk1" path="res://Assets/body_var2.glb" id="1_t4q6l"]
+
+[node name="body_var2" instance=ExtResource("1_t4q6l")]
